@@ -1,4 +1,4 @@
-:: Git 명령어
+## Git 명령어
 - `git init` git 초기화하기(git 시작하기)
 - `git add` commit 준비
 - `git commit -m "메세지"` commit하며 메세지 남기기

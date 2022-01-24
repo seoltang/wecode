@@ -9,10 +9,6 @@
     width: 100%;
   }
 
-  .hidden {
-    display: none;
-  }
-
   nav {
     @extend %nav-container;
     border-bottom: 1px solid $gray2;
@@ -26,7 +22,7 @@
       }
 
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       height: $nav-height;
       padding: 14px 0 12px;
@@ -34,17 +30,22 @@
 
       .logo {
         @extend %logo;
+        align-self: center;
         font-size: 25px;
       }
 
       /* 검색창 */
       .search {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         position: relative;
+        width: 268px;
+        min-width: 125px;
 
         input {
           @include border-gray;
-          width: 293px;
-          min-width: 125px;
+          width: 100%;
           height: 36px;
           padding: 3px 32px;
           border-radius: 3px;
@@ -57,17 +58,57 @@
 
         i.fa-search {
           position: absolute;
-          top: 50%;
+          top: 18px;
           left: 12px;
           transform: translateY(-50%);
           color: $gray2;
           font-size: 14px;
+
+          &.hidden {
+            display: none;
+          }
+        }
+
+        .search-result {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          top: 12px;
+          box-shadow: 0 0 5px 1px rgba($color: #000000, $alpha: 0.2);
+
+          &.hidden {
+            display: none;
+          }
+
+          .tail {
+            position: absolute;
+            top: -2px;
+            left: 187.5px;
+            width: 14px;
+            height: 14px;
+            transform: rotate(45deg) translateX(-50%);
+            background-color: white;
+            box-shadow: 0 0 5px 1px rgba($color: #000000, $alpha: 0.2);
+          }
+
+          .search-box {
+            width: 375px;
+            height: 362px;
+            padding-top: 12px;
+            border-radius: 6px;
+            background-color: white;
+            z-index: 2;
+            font-size: 14px;
+            overflow-x: hidden;
+            overflow-y: auto;
+          }
         }
       }
 
       /* nav 오른쪽 메뉴 */
       .menu-wrapper {
         display: flex;
+        align-self: center;
         justify-content: space-between;
         width: 120px;
 
@@ -78,5 +119,21 @@
         }
       }
     }
+  }
+}
+
+.SearchedProfile {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+
+  .user-img {
+    @include profile-img(44px);
+    margin-right: 12px;
+  }
+
+  .description {
+    margin-top: 8px;
+    color: $gray3;
   }
 }

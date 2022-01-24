@@ -20,17 +20,25 @@ const Form = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    // fetch('http://10.58.2.98:8000/users/signin', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     email: inputState.id,
-    //     password: inputState.password,
-    //   }),
-    // })
-    //   .then(res => res.json())
-    //   .then(res => console.log(res));
+    fetch('http://172.30.1.55:8002/signin', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: inputState.id,
+        email: inputState.id,
+        password: inputState.password,
+        phone_number: '010-1234-5678',
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'SUCCESS') {
+          console.log(res);
+          localStorage.setItem('access_token', res.access_token);
+          localStorage.setItem('email', inputState.id);
+        }
+      });
 
-    sessionStorage.setItem('id', inputState.id);
+    // sessionStorage.setItem('id', inputState.id);
     navigate('/main-Kyeom');
   };
 

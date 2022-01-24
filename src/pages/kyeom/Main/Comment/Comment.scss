@@ -5,7 +5,7 @@ section.uploaded-comment {
   margin-bottom: 12px;
 
   .uploaded-comment-wrapper {
-    display: flex;
+    @include flex-justify-between;
     margin-bottom: 8px;
 
     .name {

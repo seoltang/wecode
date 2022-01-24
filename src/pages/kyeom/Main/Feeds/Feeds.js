@@ -4,22 +4,24 @@ import Comment from '../Comment/Comment';
 import './Feeds.scss';
 
 const Feed = props => {
-  const {
-    src,
-    userName,
-    userImgSrc,
-    content,
-    isLiked,
-    likes,
-    whoLikes,
-    comments,
-  } = props;
+  // const {
+  //   src,
+  //   userName,
+  //   userImgSrc,
+  //   content,
+  //   isLiked,
+  //   likes,
+  //   whoLikes,
+  //   comments,
+  // } = props;
+  const { name, image, post, postId, likes } = props;
   const likeRef = useRef();
   const [emptyHeart, filledHeart] = ['far fa-heart', 'fas fa-heart'];
   const handleLike = () => {
     likeRef.current.className =
       likeRef.current.className === emptyHeart ? filledHeart : emptyHeart;
   };
+  let isLiked = false;
   useEffect(() => {
     likeRef.current.className = isLiked ? filledHeart : emptyHeart;
   });
@@ -28,9 +30,9 @@ const Feed = props => {
       <div className="feed-bar">
         <header>
           <div className="profile-img">
-            <img alt="feed profile" src={userImgSrc} />
+            <img alt="feed profile" src={image} />
           </div>
-          <div className="name">{userName}</div>
+          <div className="name">{name}</div>
         </header>
         <Button
           className="button"
@@ -39,7 +41,7 @@ const Feed = props => {
         />
       </div>
       <section className="feed-img">
-        <img alt="feed" src={src} />
+        <img alt="feed" src={image} />
       </section>
       <section className="button-wrapper">
         <div className="button-left">
@@ -64,14 +66,14 @@ const Feed = props => {
         />
       </section>
       <section className="message">
-        <span className="name">{whoLikes}</span>님{' '}
-        <span>{`외 ${likes}명`}</span>이 좋아합니다
+        <span className="name">{name}</span>님 <span>{`외 ${likes}명`}</span>이
+        좋아합니다
       </section>
       <section className="content">
-        <span className="name">{userName}</span>
-        <span>{content}</span>
+        <span className="name">{name}</span>
+        <span>{post}</span>
       </section>
-      <Comment comments={comments} />
+      <Comment postId={postId} name={name} />
     </article>
   );
 };
@@ -83,6 +85,16 @@ const Feeds = ({ feedData }) => {
         feedData.map(data => (
           <Feed
             key={data.id}
+            image={data.image}
+            name={data.name}
+            post={data.post}
+            postId={data.id}
+            likes={data.like_count}
+          />
+        ))}
+      {/*  feedData.map(data => (
+           <Feed
+            key={data.id}
             id={data.id}
             src={data.src}
             userName={data.userName}
@@ -93,7 +105,9 @@ const Feeds = ({ feedData }) => {
             whoLikes={data.whoLikes}
             comments={data.comments}
           />
-        ))}
+        ))} */}
+
+      {/* {console.log(feedData)} */}
     </div>
   );
 };
